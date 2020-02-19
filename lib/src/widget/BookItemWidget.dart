@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
-class BookItemWidget extends StatefulWidget {
-  BookItemWidget({Key key, this.title}) : super(key: key);
+import '../entity/Book.dart';
 
-  final String title;
+class BookItemWidget extends StatefulWidget {
+  BookItemWidget({Key key, this.book}) : super(key: key);
+
+  final Book book;
 
   @override
   _BookItemWidget createState() => _BookItemWidget();
@@ -17,9 +19,12 @@ class _BookItemWidget extends State<BookItemWidget> {
         child: Container(
           margin: const EdgeInsets.all(10.0),
           color: Colors.amber[600],
-          width: 48.0,
+          width: 150,
           height: 48.0,
-          child: Text(widget.title)
+          child: Align(
+            alignment: Alignment.center,
+            child: Text(widget.book.title + ' - ' + widget.book.author)
+          )
         ),
     );
   }

@@ -1,5 +1,9 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+
 import '../widget/BookItemWidget.dart';
+import '../entity/Book.dart';
+import '../service/BookService.dart';
 
 class HomePageController extends StatefulWidget {
   HomePageController({Key key, this.title}) : super(key: key);
@@ -11,7 +15,14 @@ class HomePageController extends StatefulWidget {
 }
 
 class _HomePageControllerState extends State<HomePageController> {
+  Future<Book> futureBook;
 
+  @override
+  void initState() {
+    super.initState();
+    BookService bookService = new BookService();
+    futureBook = bookService.fetchBooks();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,11 +30,21 @@ class _HomePageControllerState extends State<HomePageController> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            new BookItemWidget(title: "titre livre")
-          ],
+        child: FutureBuilder<Book>(
+          future: futureBook,
+          builder: (context, snapshot) {
+            print(snapshot);
+            if (snapshot.hasData) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  new BookItemWidget(book: snapshot.data)
+                ],
+              );
+            } else {
+              return Text("${snapshot.error}");
+            }
+          },
         ),
       ),
     );

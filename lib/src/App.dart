@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'widget/HomePageWidget.dart';
+import 'controller/HomePageController.dart';
 
 class App extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -10,7 +9,7 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
-      home: HomePage(title: 'Swap locally your books !'),
+      home: HomePageController(title: 'Swap locally your books !'),
     );
   }
 }

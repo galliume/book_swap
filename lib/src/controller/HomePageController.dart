@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import '../widget/BookItemWidget.dart';
 
-class HomePage extends StatefulWidget {
-  HomePage({Key key, this.title}) : super(key: key);
+class HomePageController extends StatefulWidget {
+  HomePageController({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomePageControllerState createState() => _HomePageControllerState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageControllerState extends State<HomePageController> {
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-
+            new BookItemWidget(title: "titre livre")
           ],
         ),
       ),

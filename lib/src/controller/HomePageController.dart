@@ -15,7 +15,7 @@ class HomePageController extends StatefulWidget {
 }
 
 class _HomePageControllerState extends State<HomePageController> {
-  Future<Book> futureBook;
+  Future<List> futureBook;
 
   @override
   void initState() {
@@ -30,20 +30,40 @@ class _HomePageControllerState extends State<HomePageController> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: FutureBuilder<Book>(
-          future: futureBook,
-          builder: (context, snapshot) {
-            print(snapshot);
-            if (snapshot.hasData) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  new BookItemWidget(book: snapshot.data)
-                ],
-              );
-            } else {
-              return Text("${snapshot.error}");
-            }
+        child:ListView.builder(
+          itemCount: 10, //@TODO make it dynamic with the Future<> ?
+          itemBuilder: (context, index) {
+            return FutureBuilder(
+              future: futureBook,
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return Text("${snapshot.error}");
+                }
+                switch (snapshot.connectionState) {
+                  case ConnectionState.active:
+                  case ConnectionState.none:
+                  case ConnectionState.waiting:
+                    return CircularProgressIndicator();
+                  case ConnectionState.done:
+                    if (snapshot.hasData && snapshot.data.length > index) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          new BookItemWidget(book: snapshot.data[index])
+                        ],
+                      );
+                    } else {
+                      return Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            new Text("vers l'infini et au delà")
+                          ]
+                      );
+                    }
+                }
+                return null;
+              }
+            );
           },
         ),
       ),

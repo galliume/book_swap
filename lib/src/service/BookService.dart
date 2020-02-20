@@ -7,7 +7,7 @@ import '../entity/Book.dart';
 
 class BookService {
 
-  Future<Book> fetchBooks() async {
+  Future<List> fetchBooks() async {
     final response = await http.get(
       "http://192.168.1.30:8000/api/books",
       headers: {"X-AUTH-TOKEN": "SomeNaiveApiToken_5e4c563a44b34"}
@@ -15,7 +15,15 @@ class BookService {
 
     if (200 == response.statusCode) {
       List<dynamic> body = json.decode(response.body);
-      return Book.fromJson(body[0]);
+      List<Book> books = new List();
+
+      body.forEach((element) {
+        books.add(Book.fromJson(element));
+      });
+
+      print("=============================");
+      books.forEach((element) { print(element.title); });
+      return books;
     } else {
       throw Exception("Unable to load book");
     }

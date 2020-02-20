@@ -21,8 +21,6 @@ class BookService {
         books.add(Book.fromJson(element));
       });
 
-      print("=============================");
-      books.forEach((element) { print(element.title); });
       return books;
     } else {
       throw Exception("Unable to load book");

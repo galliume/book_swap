@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../entity/Book.dart';
+import '../../entity/Book.dart';
 
 class BookItemWidget extends StatefulWidget {
   BookItemWidget({Key key, this.book}) : super(key: key);

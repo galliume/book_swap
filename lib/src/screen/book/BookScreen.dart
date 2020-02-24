@@ -5,7 +5,7 @@ import 'dart:async';
 class BookScreen extends StatefulWidget {
   Future<List> books;
 
-  BookScreen({ this.books });
+      BookScreen({ this.books });
 
   @override
   _BookScreenState createState() => _BookScreenState();
@@ -15,7 +15,12 @@ class _BookScreenState extends State<BookScreen> {
 
   @override
   Widget build(BuildContext context) {
-        return FutureBuilder(
+    return Container(
+          padding: const EdgeInsets.all(8.0),
+          color: Colors.blue[600],
+          alignment: Alignment.center,
+          transform: Matrix4.rotationZ(0.1),
+        child: FutureBuilder(
             future: this.widget.books,
             builder: (context, snapshot) {
               if (snapshot.hasError) {
@@ -43,6 +48,8 @@ class _BookScreenState extends State<BookScreen> {
                   }
 
                 return new Text("an error has occured");
-            });
-      }
+            }
+        )
+      );
+    }
   }

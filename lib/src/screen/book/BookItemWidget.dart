@@ -19,11 +19,15 @@ class _BookItemWidget extends State<BookItemWidget> {
         child: Container(
           margin: const EdgeInsets.all(10.0),
           color: Colors.amber[600],
-          width: 150,
-          height: 48.0,
-          child: Align(
-            alignment: Alignment.center,
-            child: Text(widget.book.title + ' - ' + widget.book.author)
+          width: 300,
+          height: 75.0,
+          child: Row(
+            children: <Widget>[
+              Image(image: AssetImage("assets/thumbnails/" + widget.book.thumbnail)),
+              Text(
+                  widget.book.title + ' - ' + widget.book.author,
+              )
+            ]
           )
         ),
     );

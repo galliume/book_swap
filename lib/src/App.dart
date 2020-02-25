@@ -23,7 +23,7 @@ class App extends StatelessWidget {
           bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
         ),
       ),
-      home: HomePageController(title: 'Swap locally your books !'),
+      home: HomePageController(title: 'Swap your books locally !'),
     );
   }
 }
